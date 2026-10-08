@@ -1,0 +1,12 @@
+{
+  "render_date": "2026-10-09",
+  "source_run": "A4-20260930-desk-full-03",
+  "trajectory_sha256": "9f2b00a3dbfcd13e690b59fcf82214013d7e0d2590b39da564b4d706050a9d64",
+  "full_map_sha256": "d371fdd402936e0a4ae1ce9f8a02bbaca8bdd45151f7a335ac00c0f44dc2742e",
+  "full_map_points": 1031428,
+  "preview_points": 30000,
+  "sampling": "evenly spaced original point indices, including first and last",
+  "trajectory_frame": "exported map frame; no alignment applied for this plot",
+  "dataset": "TUM RGB-D freiburg1_desk",
+  "note": "Figures rendered from saved outputs; no new SLAM run."
+}
