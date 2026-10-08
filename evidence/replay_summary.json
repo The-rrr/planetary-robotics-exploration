@@ -1,0 +1,18 @@
+{
+  "association_source": "<PROJECT_ROOT>/results/a2/freiburg1_desk_associations.csv",
+  "dataset": "<PROJECT_ROOT>/data/rgbd_dataset_freiburg1_desk",
+  "published_pairs": 573,
+  "requested_pairs": 573,
+  "odometry_messages": 573,
+  "rtabmap_info_messages": 548,
+  "global_loop_events": 124,
+  "groundtruth_published": false,
+  "depth_input_encoding": "TUM 16-bit PNG, 5000 units/m",
+  "depth_published_encoding": "32FC1 meters",
+  "depth_scale_applied": 5000.0,
+  "topics_published": [
+    "/camera/rgb/image_color",
+    "/camera/depth/image",
+    "/camera/rgb/camera_info"
+  ]
+}
