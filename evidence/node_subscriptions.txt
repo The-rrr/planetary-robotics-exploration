@@ -1,0 +1,90 @@
+===== /rgbd_odometry =====
+/rgbd_odometry
+  Subscribers:
+    /camera/depth/image: sensor_msgs/msg/Image
+    /camera/rgb/camera_info: sensor_msgs/msg/CameraInfo
+    /camera/rgb/image_color: sensor_msgs/msg/Image
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+  Publishers:
+    /odom: nav_msgs/msg/Odometry
+    /odom_info: rtabmap_msgs/msg/OdomInfo
+    /odom_info_lite: rtabmap_msgs/msg/OdomInfo
+    /odom_last_frame: sensor_msgs/msg/PointCloud2
+    /odom_local_map: sensor_msgs/msg/PointCloud2
+    /odom_local_scan_map: sensor_msgs/msg/PointCloud2
+    /odom_rgbd_image: rtabmap_msgs/msg/RGBDImage
+    /odom_sensor_data/compressed: rtabmap_msgs/msg/SensorData
+    /odom_sensor_data/features: rtabmap_msgs/msg/SensorData
+    /odom_sensor_data/raw: rtabmap_msgs/msg/SensorData
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+    /tf: tf2_msgs/msg/TFMessage
+  Service Servers:
+    /rgbd_odometry/describe_parameters: rcl_interfaces/srv/DescribeParameters
+    /rgbd_odometry/get_parameter_types: rcl_interfaces/srv/GetParameterTypes
+    /rgbd_odometry/get_parameters: rcl_interfaces/srv/GetParameters
+    /rgbd_odometry/get_type_description: type_description_interfaces/srv/GetTypeDescription
+    /rgbd_odometry/list_parameters: rcl_interfaces/srv/ListParameters
+    /rgbd_odometry/log_debug: std_srvs/srv/Empty
+    /rgbd_odometry/log_error: std_srvs/srv/Empty
+    /rgbd_odometry/log_info: std_srvs/srv/Empty
+    /rgbd_odometry/log_warning: std_srvs/srv/Empty
+    /rgbd_odometry/pause_odom: std_srvs/srv/Empty
+    /rgbd_odometry/reset_odom: std_srvs/srv/Empty
+    /rgbd_odometry/reset_odom_to_pose: rtabmap_msgs/srv/ResetPose
+    /rgbd_odometry/resume_odom: std_srvs/srv/Empty
+    /rgbd_odometry/set_parameters: rcl_interfaces/srv/SetParameters
+    /rgbd_odometry/set_parameters_atomically: rcl_interfaces/srv/SetParametersAtomically
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
+
+
+===== /rtabmap =====
+/rtabmap
+  Subscribers:
+
+  Publishers:
+    /cloud_ground: sensor_msgs/msg/PointCloud2
+    /cloud_map: sensor_msgs/msg/PointCloud2
+    /cloud_obstacles: sensor_msgs/msg/PointCloud2
+    /diagnostics: diagnostic_msgs/msg/DiagnosticArray
+    /global_path: nav_msgs/msg/Path
+    /global_path_nodes: rtabmap_msgs/msg/Path
+    /goal_out: geometry_msgs/msg/PoseStamped
+    /goal_reached: std_msgs/msg/Bool
+    /grid_prob_map: nav_msgs/msg/OccupancyGrid
+    /info: rtabmap_msgs/msg/Info
+    /labels: visualization_msgs/msg/MarkerArray
+    /landmarks: geometry_msgs/msg/PoseArray
+    /local_grid_empty: sensor_msgs/msg/PointCloud2
+    /local_grid_ground: sensor_msgs/msg/PointCloud2
+    /local_grid_obstacle: sensor_msgs/msg/PointCloud2
+    /local_path: nav_msgs/msg/Path
+    /local_path_nodes: rtabmap_msgs/msg/Path
+    /localization_pose: geometry_msgs/msg/PoseWithCovarianceStamped
+    /map: nav_msgs/msg/OccupancyGrid
+    /mapData: rtabmap_msgs/msg/MapData
+    /mapGraph: rtabmap_msgs/msg/MapGraph
+    /mapOdomCache: rtabmap_msgs/msg/MapGraph
+    /mapPath: nav_msgs/msg/Path
+    /octomap_binary: octomap_msgs/msg/Octomap
+    /octomap_empty_space: sensor_msgs/msg/PointCloud2
+    /octomap_full: octomap_msgs/msg/Octomap
+    /octomap_global_frontier_space: sensor_msgs/msg/PointCloud2
+    /octomap_grid: nav_msgs/msg/OccupancyGrid
+    /octomap_ground: sensor_msgs/msg/PointCloud2
+    /octomap_obstacles: sensor_msgs/msg/PointCloud2
+    /octomap_occupied_space: sensor_msgs/msg/PointCloud2
+    /parameter_events: rcl_interfaces/msg/ParameterEvent
+    /rosout: rcl_interfaces/msg/Log
+    /tf: tf2_msgs/msg/TFMessage
+  Service Servers:
+
+  Service Clients:
+
+  Action Servers:
+
+  Action Clients:
