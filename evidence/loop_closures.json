@@ -1,0 +1,402 @@
+{
+  "database": "<PROJECT_ROOT>/results/a4/A4-20260930-desk-full-03/rtabmap.db",
+  "node_count": 548,
+  "directed_link_row_count": 2146,
+  "directed_link_type_counts": {
+    "neighbor": 1094,
+    "global_closure": 248,
+    "local_space_closure": 804,
+    "local_time_closure": 0,
+    "user_closure": 0,
+    "virtual_closure": 0,
+    "neighbor_merged": 0,
+    "pose_prior": 0,
+    "landmark": 0,
+    "gravity": 0
+  },
+  "unique_global_loop_closure_count": 124,
+  "long_range_global_loop_closure_count": 19,
+  "global_loop_closure_sample": [
+    {
+      "from_id": 34,
+      "to_id": 46,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 12
+    },
+    {
+      "from_id": 35,
+      "to_id": 52,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 17
+    },
+    {
+      "from_id": 35,
+      "to_id": 53,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 18
+    },
+    {
+      "from_id": 44,
+      "to_id": 54,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 44,
+      "to_id": 450,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 406
+    },
+    {
+      "from_id": 44,
+      "to_id": 451,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 407
+    },
+    {
+      "from_id": 45,
+      "to_id": 55,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 45,
+      "to_id": 449,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 404
+    },
+    {
+      "from_id": 46,
+      "to_id": 56,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 47,
+      "to_id": 437,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 390
+    },
+    {
+      "from_id": 518,
+      "to_id": 528,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 523,
+      "to_id": 533,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 526,
+      "to_id": 536,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 527,
+      "to_id": 537,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 528,
+      "to_id": 539,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 11
+    },
+    {
+      "from_id": 532,
+      "to_id": 542,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 535,
+      "to_id": 545,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 536,
+      "to_id": 546,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 537,
+      "to_id": 547,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    },
+    {
+      "from_id": 538,
+      "to_id": 548,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 10
+    }
+  ],
+  "long_range_global_loop_closures": [
+    {
+      "from_id": 44,
+      "to_id": 450,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 406
+    },
+    {
+      "from_id": 44,
+      "to_id": 451,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 407
+    },
+    {
+      "from_id": 45,
+      "to_id": 449,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 404
+    },
+    {
+      "from_id": 47,
+      "to_id": 437,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 390
+    },
+    {
+      "from_id": 48,
+      "to_id": 436,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 388
+    },
+    {
+      "from_id": 49,
+      "to_id": 428,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 379
+    },
+    {
+      "from_id": 49,
+      "to_id": 443,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 394
+    },
+    {
+      "from_id": 52,
+      "to_id": 427,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 375
+    },
+    {
+      "from_id": 53,
+      "to_id": 424,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 371
+    },
+    {
+      "from_id": 106,
+      "to_id": 340,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 234
+    },
+    {
+      "from_id": 107,
+      "to_id": 337,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 230
+    },
+    {
+      "from_id": 107,
+      "to_id": 338,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 231
+    },
+    {
+      "from_id": 107,
+      "to_id": 339,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 232
+    },
+    {
+      "from_id": 133,
+      "to_id": 312,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 179
+    },
+    {
+      "from_id": 133,
+      "to_id": 313,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 180
+    },
+    {
+      "from_id": 135,
+      "to_id": 310,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 175
+    },
+    {
+      "from_id": 136,
+      "to_id": 309,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 173
+    },
+    {
+      "from_id": 138,
+      "to_id": 308,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 170
+    },
+    {
+      "from_id": 200,
+      "to_id": 232,
+      "type": 1,
+      "type_name": "global_closure",
+      "node_id_gap": 32
+    }
+  ],
+  "unique_proximity_closure_count": 402,
+  "runtime_global_loop_event_count": 124,
+  "runtime_global_loop_event_sample": [
+    {
+      "timestamp": 1305031454.85962,
+      "ref_id": 46,
+      "loop_closure_id": 34
+    },
+    {
+      "timestamp": 1305031455.059636,
+      "ref_id": 52,
+      "loop_closure_id": 35
+    },
+    {
+      "timestamp": 1305031455.0917,
+      "ref_id": 53,
+      "loop_closure_id": 35
+    },
+    {
+      "timestamp": 1305031455.127695,
+      "ref_id": 54,
+      "loop_closure_id": 44
+    },
+    {
+      "timestamp": 1305031455.15972,
+      "ref_id": 55,
+      "loop_closure_id": 45
+    },
+    {
+      "timestamp": 1305031455.191655,
+      "ref_id": 56,
+      "loop_closure_id": 46
+    },
+    {
+      "timestamp": 1305031455.291831,
+      "ref_id": 59,
+      "loop_closure_id": 49
+    },
+    {
+      "timestamp": 1305031455.327766,
+      "ref_id": 60,
+      "loop_closure_id": 50
+    },
+    {
+      "timestamp": 1305031455.391665,
+      "ref_id": 62,
+      "loop_closure_id": 52
+    },
+    {
+      "timestamp": 1305031456.02777,
+      "ref_id": 80,
+      "loop_closure_id": 69
+    },
+    {
+      "timestamp": 1305031472.495626,
+      "ref_id": 528,
+      "loop_closure_id": 518
+    },
+    {
+      "timestamp": 1305031472.695755,
+      "ref_id": 533,
+      "loop_closure_id": 523
+    },
+    {
+      "timestamp": 1305031472.79564,
+      "ref_id": 536,
+      "loop_closure_id": 526
+    },
+    {
+      "timestamp": 1305031472.827627,
+      "ref_id": 537,
+      "loop_closure_id": 527
+    },
+    {
+      "timestamp": 1305031472.895713,
+      "ref_id": 539,
+      "loop_closure_id": 528
+    },
+    {
+      "timestamp": 1305031472.9957037,
+      "ref_id": 542,
+      "loop_closure_id": 532
+    },
+    {
+      "timestamp": 1305031473.095695,
+      "ref_id": 545,
+      "loop_closure_id": 535
+    },
+    {
+      "timestamp": 1305031473.127744,
+      "ref_id": 546,
+      "loop_closure_id": 536
+    },
+    {
+      "timestamp": 1305031473.16706,
+      "ref_id": 547,
+      "loop_closure_id": 537
+    },
+    {
+      "timestamp": 1305031473.196069,
+      "ref_id": 548,
+      "loop_closure_id": 538
+    }
+  ],
+  "loop_closure_demonstrated": true,
+  "criterion": "true only when RTAB-Map runtime Info reports a global loop or the database has a type=1 kGlobalClosure constraint"
+}
