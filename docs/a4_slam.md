@@ -1,40 +1,40 @@
-# A4：在 TUM RGB-D 数据上运行完整 RTAB-Map SLAM
+# A4: Running a Complete RTAB-Map SLAM Pipeline on TUM RGB-D Data
 
-## 主结果
+## Main result
 
-最终主运行编号：`A4-20260930-desk-full-03`。
+Final recorded run: `A4-20260930-desk-full-03`.
 
-| 项目 | 结果 |
+| Item | Result |
 |---|---:|
-| 输入序列 | `freiburg1_desk` |
-| A2 配对输入 | 573 对 |
-| 成功发布 / RGB-D 里程计输出 | 573 / 573 |
-| RTAB-Map 数据库节点 | 548 |
-| 唯一全局回环约束 | 124 |
-| 长距离全局回环约束（节点编号差至少 30） | 19 |
-| 导出地图点数 | 1,031,428 |
-| 纯里程计 APE RMSE | 0.097661 m |
-| 回环优化后 APE RMSE | 0.025180 m |
+| Input sequence | `freiburg1_desk` |
+| A2 matched inputs | 573 pairs |
+| Successfully published / RGB-D odometry outputs | 573 / 573 |
+| RTAB-Map database nodes | 548 |
+| Unique global loop-closure constraints | 124 |
+| Long-range global loop closures (node-ID separation of at least 30) | 19 |
+| Exported map points | 1,031,428 |
+| Odometry-only APE RMSE | 0.097661 m |
+| Loop-optimised APE RMSE | 0.025180 m |
 
-APE 使用 SE(3) Umeyama 对齐。真值只由估计结束后的 `evo_ape` 读取，不发布到 ROS，也不提供给里程计或 RTAB-Map。
+APE was calculated after SE(3) Umeyama alignment. Ground truth was read only by `evo_ape` after estimation had finished. It was not published to ROS or supplied to either the odometry node or RTAB-Map.
 
-主产物位于 `results/a4/A4-20260930-desk-full-03/`：
+The main outputs are stored in `results/a4/A4-20260930-desk-full-03/`:
 
-| 文件 | 含义 |
+| File | Meaning |
 |---|---|
-| `odometry_estimate.tum` | RGB-D 前端逐时刻估计轨迹，TUM 时间戳格式 |
-| `slam_poses.txt` | RTAB-Map 后端优化轨迹，TUM 时间戳格式 |
-| `slam_cloud.ply` | 1 cm 体素滤波的彩色三维地图 |
-| `rtabmap.db` | 完整 RTAB-Map 数据库 |
-| `a4_rtabmap.yaml` | 本次运行的配置快照 |
-| `manifest.json` | 唯一运行编号、版本、命令、输入和职责说明 |
-| `node_subscriptions.txt` | 两个估计节点的实际订阅清单 |
-| `loop_closures.json` | 运行时事件和数据库图约束的回环审计 |
-| `odometry.log`、`slam.log`、`replay.log`、`export.log` | 完整运行与导出日志 |
+| `odometry_estimate.tum` | Per-timestamp RGB-D front-end trajectory in TUM format |
+| `slam_poses.txt` | RTAB-Map back-end optimised trajectory in TUM format |
+| `slam_cloud.ply` | Coloured 3D map filtered with 1 cm voxels |
+| `rtabmap.db` | Complete RTAB-Map database |
+| `a4_rtabmap.yaml` | Configuration snapshot for this run |
+| `manifest.json` | Unique run ID, versions, commands, inputs and responsibility notes |
+| `node_subscriptions.txt` | Actual subscription lists for both estimation nodes |
+| `loop_closures.json` | Loop-closure audit from runtime events and database graph constraints |
+| `odometry.log`, `slam.log`, `replay.log`, `export.log` | Complete run and export logs |
 
-## 固定环境与官方示例
+## Fixed environment and official example
 
-运行环境固定为 ROS 2 Jazzy、RTAB-Map 0.23.7：
+The recorded environment used ROS 2 Jazzy and RTAB-Map 0.23.7:
 
 ```text
 ros-jazzy-rtabmap       0.23.7-1noble.20260903.070800
@@ -42,28 +42,34 @@ ros-jazzy-rtabmap-odom  0.23.7-1noble.20260903.102901
 ros-jazzy-rtabmap-slam  0.23.7-1noble.20260903.103010
 ```
 
-节点连接以该安装版本的官方 `rtabmap_examples/launch/rgbdslam_datasets.launch.py` 为基线：`rgbd_odometry` 接收 RGB、深度、相机内参，输出 `/odom`、`/odom_info` 和 `/odom_rgbd_image`；`rtabmap` 使用后两项做回环检测和位姿图优化。项目有意删除官方示例中的 ground-truth frame 参数，固定为空字符串。
+The node connections follow the installed version's official `rtabmap_examples/launch/rgbdslam_datasets.launch.py` example. `rgbd_odometry` receives colour, depth and camera information, then publishes `/odom`, `/odom_info` and `/odom_rgbd_image`. `rtabmap` uses the latter two streams for loop detection and pose-graph optimisation. The ground-truth frame parameters from the official example were deliberately set to empty strings.
 
-TUM 原始 PNG 深度是 `5000 units/m`。回放节点先转换为以米表示的 ROS `32FC1`，与 TUM 官方 ROS bag 的深度语义一致；直接把 PNG 原值发布为 `16UC1` 会被 ROS 消费端按毫米解释，导致尺度放大 5 倍。相机内参沿用 A2/A3 已确认的 ROS 默认值 `525, 525, 319.5, 239.5`。依据：
+The original TUM PNG depth images use `5000 units/m`. The replay node converts these values into ROS `32FC1` depth measured in metres, matching the semantics of the official TUM ROS bags. Publishing the raw PNG integers directly as `16UC1` would cause ROS consumers to interpret them as millimetres, making the reconstructed scale five times too large.
 
-- TUM RGB-D 文件格式：https://cvg.cit.tum.de/data/datasets/rgbd-dataset/file_formats
-- RTAB-Map ROS 2 官方启动文件：https://github.com/introlab/rtabmap_ros/blob/ros2/rtabmap_launch/launch/rtabmap.launch.py
+The camera intrinsics are the ROS default values verified in A2 and A3: `525`, `525`, `319.5`, `239.5`.
 
-## 前端和后端职责
+References:
 
-- `rgbd_odometry` 负责相邻时刻的视觉运动估计并发布 `odom -> camera_rgb_optical_frame`。
-- `rtabmap` 接收前端结果，负责外观重访检索、几何验证、回环约束和全局位姿图优化。
-- `Rtabmap/DetectionRate=0` 用于离线完整处理，不按默认 1 Hz 跳过关键帧；其余核心配置保持官方数据集示例附近。
+- TUM RGB-D file format: https://cvg.cit.tum.de/data/datasets/rgbd-dataset/file_formats
+- Official RTAB-Map ROS 2 launch file: https://github.com/introlab/rtabmap_ros/blob/ros2/rtabmap_launch/launch/rtabmap.launch.py
 
-## 回环证据
+## Front-end and back-end responsibilities
 
-主运行的 `/info` 消息报告 124 次 `loop_closure_id > 0`。数据库 `Link` 表有 248 条 `type=1` 记录；RTAB-Map 对同一约束保存双向记录，因此折算为 124 个唯一 `kGlobalClosure`。其中包括 `44 <-> 450`、`45 <-> 449` 和 `47 <-> 437` 等跨越很长时间段的约束。完整样例与计数见 `loop_closures.json`。
+- `rgbd_odometry` estimates visual motion between nearby frames and publishes the `odom -> camera_rgb_optical_frame` transform.
+- `rtabmap` receives the front-end outputs and performs appearance-based place recognition, geometric verification, loop-closure constraint creation and global pose-graph optimisation.
+- `Rtabmap/DetectionRate=0` allows complete offline processing rather than skipping keyframes at the default 1 Hz. The other central settings remain close to the official dataset example.
 
-`A4-20260930-xyz-smoke-02` 是默认 1 Hz 后端检测率的短测试，只有相邻约束，审计结果明确为 `loop_closure_demonstrated=false`；它只证明里程计和导出链路可运行，不作为回环证据。
+## Loop-closure evidence
 
-## 真值隔离
+The main run's `/info` messages reported 124 events with `loop_closure_id > 0`. The database `Link` table contains 248 records with `type=1`. RTAB-Map stores each constraint in both directions, giving 124 unique `kGlobalClosure` constraints.
 
-回放节点只读取 A2 的关联 CSV、RGB PNG、深度 PNG 和相机配置。它只发布三个 topic：
+Examples include `44 <-> 450`, `45 <-> 449` and `47 <-> 437`, which connect observations separated by long intervals. Representative records and counts are stored in `loop_closures.json`.
+
+`A4-20260930-xyz-smoke-02` was a short test using the default 1 Hz back-end detection rate. It produced only neighbouring constraints, and its audit explicitly records `loop_closure_demonstrated=false`. It demonstrates that the odometry and export path could run, but it is not used as evidence of loop closure.
+
+## Ground-truth isolation
+
+The replay node reads only the A2 association CSV, RGB PNG files, depth PNG files and camera configuration. It publishes three topics:
 
 ```text
 /camera/rgb/image_color
@@ -71,7 +77,7 @@ TUM 原始 PNG 深度是 `5000 units/m`。回放节点先转换为以米表示�
 /camera/rgb/camera_info
 ```
 
-`node_subscriptions.txt` 显示估计节点没有订阅 `/world`、`kinect_gt` 或任何真值 topic；配置中的两个 `ground_truth_*` 参数也为空。只有在所有 ROS 估计进程退出、数据库关闭后，才运行：
+`node_subscriptions.txt` shows that the estimation nodes did not subscribe to `/world`, `kinect_gt` or any other ground-truth topic. The two `ground_truth_*` configuration values were also empty. Only after all ROS estimation processes had exited and the database had closed were the following commands run:
 
 ```bash
 evo_ape tum data/rgbd_dataset_freiburg1_desk/groundtruth.txt \
@@ -81,11 +87,11 @@ evo_ape tum data/rgbd_dataset_freiburg1_desk/groundtruth.txt \
   results/a4/A4-20260930-desk-full-03/slam_poses.txt -a
 ```
 
-## 复现
+## Reproduction
 
-在 Windows 项目根目录双击 `Run-A4.cmd`。它会先运行 90 帧 `freiburg1_xyz` 检查，再运行完整 `freiburg1_desk`；每次自动生成新的 UTC 时间运行编号，既不覆盖旧结果，也不复用旧数据库。
+From the Windows project root, run `Run-A4.cmd`. It first performs a 90-frame `freiburg1_xyz` check and then runs the complete `freiburg1_desk` sequence. Each execution generates a new UTC run ID, so it neither overwrites earlier results nor reuses an old database.
 
-在 WSL 中也可单独运行：
+The two stages can also be run separately in WSL:
 
 ```bash
 cd <PROJECT_ROOT>
@@ -94,8 +100,12 @@ source scripts/ros_env.sh
 /usr/bin/python3 scripts/run_a4.py --sequence desk --label full
 ```
 
-运行器会复制配置快照、保存节点订阅、正常关闭数据库，然后执行 `rtabmap-export` 导出轨迹和地图。完整运行不允许设置 `--max-frames`，以免把截断实验误标为完整序列。
+The runner copies a configuration snapshot, records node subscriptions, closes the database cleanly, and then invokes `rtabmap-export` to export the trajectory and map. A full run does not allow `--max-frames`, preventing a truncated experiment from being labelled as the complete sequence.
 
-## 修正记录
+## Correction history
 
-`A4-20260930-desk-full-01` 使用官方示例附近的 1 Hz 后端检测率，未形成回环，保留为阴性证据。`A4-20260930-desk-full-02` 虽形成图约束，但深度仍错误地按 `16UC1` 发布，尺度大约放大 5 倍，不能作为最终地图。`A4-20260930-desk-full-03` 修正为 `32FC1` 米值，是最终主结果。
+`A4-20260930-desk-full-01` used the 1 Hz back-end detection rate from the official example and did not produce loop closures; it is retained as negative evidence.
+
+`A4-20260930-desk-full-02` produced graph constraints, but still published depth incorrectly as `16UC1`, making the reconstructed scale approximately five times too large. It is not used as the final map.
+
+`A4-20260930-desk-full-03` corrected the depth stream to metre-valued `32FC1` and is the final recorded result.
