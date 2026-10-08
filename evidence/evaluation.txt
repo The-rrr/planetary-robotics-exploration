@@ -1,0 +1,18 @@
+Ground truth was read only after rgbd_odometry and rtabmap had exited.
+Tool: evo_ape 1.37.1, TUM format, SE(3) Umeyama alignment
+
+ODOMETRY_ONLY
+max    0.200344 m
+mean   0.086694 m
+median 0.087879 m
+min    0.010404 m
+rmse   0.097661 m
+std    0.044964 m
+
+OPTIMIZED_SLAM
+max    0.077393 m
+mean   0.021981 m
+median 0.019089 m
+min    0.003150 m
+rmse   0.025180 m
+std    0.012283 m
