@@ -1,0 +1,48 @@
+/**:
+  ros__parameters:
+    use_sim_time: false
+
+/rgbd_odometry:
+  ros__parameters:
+    frame_id: camera_rgb_optical_frame
+    odom_frame_id: odom
+    publish_tf: true
+    approx_sync: false
+    topic_queue_size: 50
+    sync_queue_size: 50
+    qos: 1
+    qos_camera_info: 1
+    wait_for_transform: 0.2
+    keep_color: true
+    always_process_most_recent_frame: false
+    ground_truth_frame_id: ""
+    ground_truth_base_frame_id: ""
+    Odom/Strategy: "0"
+    Odom/ResetCountdown: "15"
+    Odom/GuessSmoothingDelay: "0"
+
+/rtabmap:
+  ros__parameters:
+    frame_id: camera_rgb_optical_frame
+    map_frame_id: map
+    odom_frame_id: odom
+    publish_tf: true
+    subscribe_rgb: false
+    subscribe_depth: false
+    subscribe_rgbd: true
+    subscribe_odom_info: true
+    approx_sync: false
+    qos: 1
+    qos_odom: 1
+    ground_truth_frame_id: ""
+    ground_truth_base_frame_id: ""
+    Mem/IncrementalMemory: "true"
+    Mem/InitWMWithAllNodes: "true"
+    Mem/UseOdomFeatures: "true"
+    Rtabmap/DetectionRate: "0"
+    Rtabmap/CreateIntermediateNodes: "true"
+    RGBD/CreateOccupancyGrid: "false"
+    RGBD/LinearUpdate: "0"
+    RGBD/AngularUpdate: "0"
+    RGBD/OptimizeFromGraphEnd: "false"
+    RGBD/OptimizeMaxError: "4"
