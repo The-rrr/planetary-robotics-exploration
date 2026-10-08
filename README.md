@@ -33,7 +33,7 @@ The saved evaluation reports an optimised absolute position error RMSE of **0.02
 
 ![Recorded optimised camera trajectory](figures/trajectory.svg)
 
-![Sampled view of the recorded coloured map](figures/map-preview.svg)
+![Sampled view of the recorded coloured map](figures/map-preview.svg?v=c104d47)
 
 The map image displays a deterministic sample of the saved map, not every point. Figure provenance and reproduction commands are in [the experiment report](reports/03-slam-experiment.md).
 
