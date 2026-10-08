@@ -42,7 +42,7 @@ The audit records 248 directed global-closure rows, equivalent to 124 unique und
 
 This plot uses the saved optimised trajectory in its exported map frame. It does not show alignment against ground truth and is not an error plot. All coordinate axes are in metres.
 
-![Map preview](../figures/map-preview.svg)
+![Map preview](https://raw.githubusercontent.com/The-rrr/planetary-robotics-exploration/c104d47e6d446fd6095a04e7ea7e850f06973e23/figures/map-preview.svg)
 
 This is a deterministic subsample of up to 30,000 coloured points from the final 1,031,428-point map. It is an indoor scene reconstructed from TUM data, not an icy-world simulation. [Figure metadata](../evidence/figure-provenance.json) records source hashes and sampling details. Re-render with `python scripts/render_portfolio_figures.py --map PATH_TO_SAVED_SLAM_CLOUD`.
 
