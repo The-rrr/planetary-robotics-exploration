@@ -1,51 +1,50 @@
-# Recorded RGB-D SLAM Experiment
+# Planetary Robotics Exploration
 
-## Scope and provenance
+**From exploration destinations to navigation requirements, RGB-D SLAM experiments and cooperative robotics ideas.**
 
-Run: `A4-20260930-desk-full-03`, generated 30 September 2026. Input: the indoor TUM `freiburg1_desk` sequence. Publication figures were rendered from saved output files on 9 October 2026; no new full ROS replay was run for this portfolio.
+I am a first-year Earth and Planetary Science student developing my understanding of robotic perception and autonomous exploration. This portfolio connects my comparative study of the Moon, Mars and Europa with a guided practical project in localisation and mapping.
 
-| Recorded item | Value |
-|---|---:|
-| Associated RGB-D pairs | 573 |
-| Odometry poses | 573 |
-| Optimised poses / database nodes | 548 |
-| Exported coloured map points | 1,031,428 |
-| Unique global loop-closure constraints | 124 |
-| Global constraints spanning at least 30 node IDs | 19 |
-| Odometry-only aligned absolute position error RMSE | 0.097661 m |
-| Optimised aligned absolute position error RMSE | 0.025180 m |
+My starting question is: **How do scientific goals and environmental constraints shape the navigation capabilities an exploration robot needs?** The destination study motivates the technical work; the initial indoor RGB-D benchmark establishes basic data handling and mapping skills before attempting more demanding environments.
 
-The errors are copied from the [recorded evo evaluation](../evidence/evaluation.txt), not recalculated for the portfolio. `evo_ape` 1.37.1 used rigid SE(3) Umeyama alignment, without scale fitting. The two trajectories have different pose counts, so the values are descriptive results rather than a controlled matched-frame ablation or a justified percentage improvement. This is a single indoor sequence, not a robustness benchmark.
+## Start here
 
-## System
+1. [Moon, Mars and Europa: destination comparison](reports/01-destination-comparison.md)
+2. [From underwater localisation to cooperative exploration](reports/02-cooperative-exploration-concept.md)
+3. [Development process and lessons learned](docs/development-journal.md)
+4. [Recorded RGB-D SLAM results](reports/03-slam-experiment.md)
+5. [Reproduction guide](docs/reproduce.md)
 
-`Associated RGB-D + camera intrinsics → rgbd_odometry → RTAB-Map loop closure / pose graph → exported trajectory and map`
+## Current progress
 
-The depth conversion uses `depth_png / 5000` to obtain metres, then publishes ROS `32FC1`. The chosen ROS-default intrinsics are stored in [the camera configuration](../configs/tum_freiburg1.json). The [SLAM configuration](../configs/a4_rtabmap.yaml) leaves ground-truth frames empty.
+| Component | Status | Evidence |
+|---|---|---|
+| Destination comparison | Study notes consolidated into a report | Moon, Mars and Europa comparison |
+| RGB-D data inspection and association | Completed | Data notes and inspection script |
+| Single-frame reconstruction | Completed | Open3D reconstruction, downsampling and transform experiments |
+| RGB-D odometry and RTAB-Map SLAM | Completed on an indoor benchmark | Trajectories, loop-closure audit and evaluation |
+| Ice-world analogue, visual degradation and terrain labels | Planned | Next steps in the journal |
+| AUV localisation combined with swarm coordination principles | Research concept | Questions and proposed experiments; not implemented |
 
-The [subscription snapshot](../evidence/node_subscriptions.txt) and replay source document the ground-truth separation. Ground truth is read by evaluation only after the estimation processes stop.
+## Recorded experiment
 
-## Inspectable evidence
+The final recorded run, `A4-20260930-desk-full-03`, used **TUM freiburg1_desk**. It processed **573 RGB-D pairs**, stored **548 optimised poses**, and exported **1,031,428 coloured map points**. The database audit found **124 unique global loop-closure constraints**, including 19 spanning at least 30 node IDs.
 
-- [Odometry trajectory](../evidence/odometry_estimate.tum)
-- [Optimised trajectory](../evidence/slam_poses.txt)
-- [Loop-closure audit](../evidence/loop_closures.json)
-- [Replay counts](../evidence/replay_summary.json)
-- [Evaluation](../evidence/evaluation.txt)
-- [Detailed original A4 notes](../docs/a4_slam.md)
+The saved evaluation reports an optimised absolute position error RMSE of **0.025180 m**, using SE(3) rigid alignment to motion-capture ground truth after estimation had stopped. This is one indoor dataset result; it does not demonstrate planetary, underwater, multi-robot or flight performance. The odometry and optimised trajectories contain different numbers of poses, so their reported errors should not be presented as a controlled percentage improvement.
 
-The audit records 248 directed global-closure rows, equivalent to 124 unique undirected global constraints. The large original RTAB-Map database and full PLY map remain local. Their absence means the public subset supports inspection of the saved audit and trajectories, but does not independently rerun the database audit until the pipeline is reproduced.
+![Recorded optimised camera trajectory](figures/trajectory.svg)
 
-## Figures
+![Sampled view of the recorded coloured map](https://raw.githubusercontent.com/The-rrr/planetary-robotics-exploration/c104d47e6d446fd6095a04e7ea7e850f06973e23/figures/map-preview.svg)
 
-![Trajectory](../figures/trajectory.svg)
+The map image displays a deterministic sample of the saved map, not every point. Figure provenance and reproduction commands are in [the experiment report](reports/03-slam-experiment.md).
 
-This plot uses the saved optimised trajectory in its exported map frame. It does not show alignment against ground truth and is not an error plot. All coordinate axes are in metres.
+## Learning approach and attribution
 
-![Map preview](../figures/map-preview.svg?v=c104d47)
+This is a learning portfolio using existing tools, official documentation and AI-assisted coding/debugging. RTAB-Map supplies the odometry and SLAM algorithms; Open3D supplies point-cloud processing. The work here focuses on connecting the workflow, understanding geometry and units, recording experiments and checking the resulting evidence. It does not claim a newly invented SLAM algorithm or independently implemented swarm system.
 
-This is a deterministic subsample of up to 30,000 coloured points from the final 1,031,428-point map. It is an indoor scene reconstructed from TUM data, not an icy-world simulation. [Figure metadata](../evidence/figure-provenance.json) records source hashes and sampling details. Re-render with `python scripts/render_portfolio_figures.py --map PATH_TO_SAVED_SLAM_CLOUD`.
+The reports were consolidated on **9 October 2026** from earlier study conversations and local experiment records. The included experiment outputs were generated in September; the portfolio figures were rendered from those saved outputs on 9 October. A complete new ROS run was not performed for this publication.
 
-## Limitations and next experiment
+See [sources and data attribution](docs/sources-and-attribution.md). Raw datasets, the large database, full-resolution map, machine-specific setup scripts and private local paths are omitted from this public snapshot.
 
-The result uses an existing framework, a short indoor dataset and recorded RGB-D images. There is no deployment on a robot and no Mars/Europa, underwater or multi-agent validation. Next, compare matched timestamps, calculate RPE and vary texture/depth loss under controlled conditions before attempting broader claims.
+## 中文说明
+
+这是一条连贯的学习路线：月球、火星和木卫二的探索目的地分析，引出机器人定位与建图需求；随后在公开室内数据上完成 RGB-D 点云和 SLAM 基础实践，再思考水下 AUV 定位与无人机集群协同原则的结合。已完成实验与未来构想分别标明。实际实验仍使用地球室内数据，不能视为木卫二、水下或多机器人系统的验证。
